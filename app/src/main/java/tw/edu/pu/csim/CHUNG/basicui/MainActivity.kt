@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import tw.edu.pu.csim.CHUNG.basicui.ui.theme.BasicUITheme
 
 class MainActivity : ComponentActivity() {
@@ -75,7 +77,11 @@ fun ColumnExample(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0x8AE0BBE4)),
+            .background(Color(0x8AE0BBE4))
+            .pointerInput(Unit) {
+                // 強行消費（攔截）該區域內所有的觸控與滑動手勢
+                detectTapGestures { }
+            },
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
